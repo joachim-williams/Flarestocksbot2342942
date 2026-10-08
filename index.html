@@ -3,9 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flare Discover and track.</title>
-  <meta name="description" content="Flare brings shop data, item values, trade analysis, deal discovery, alerts, and community tools into one platform.">
+  <title>Flare – Discord Bot for Blox Fruits | Live Fruit Stock, Values &amp; Quick Alerts</title>
+  <meta name="description" content="Flare is a popular 24/7 Discord utility and alert bot (rebrand of Neptune) by Joachim Williams. Get quick alerts for Blox Fruits fruit stock, item values, trade analysis, deal discovery, and community tools in one platform.">
+  <meta name="keywords" content="Flare bot, Flare Discord bot, Blox Fruits bot, Blox Fruits fruit stock, Blox Fruits values, quick alerts, item values, trade analysis, deal discovery, Neptune rebrand, Joachim Williams, Roblox Discord bot, live tracking, game alerts">
+  <meta name="author" content="Joachim Williams">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#FF8A00">
+  <link rel="canonical" href="https://flare.gg/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flare.gg/">
+  <meta property="og:title" content="Flare – Discord Bot for Blox Fruits | Live Fruit Stock, Values &amp; Quick Alerts">
+  <meta property="og:description" content="Flare is a popular 24/7 Discord utility and alert bot (rebrand of Neptune) by Joachim Williams. Track Blox Fruits fruit stock every 4 hours, item values, trades, deals, and get instant alerts.">
+  <meta property="og:image" content="https://iili.io/fuZmZP9.gif">
+  <meta property="og:site_name" content="Flare">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flare – Discord Bot for Blox Fruits | Live Fruit Stock, Values &amp; Quick Alerts">
+  <meta name="twitter:description" content="Flare (rebrand of Neptune) by Joachim Williams – 24/7 Discord bot for Blox Fruits fruit stock alerts, item values, trade tools, and deal discovery.">
+  <meta name="twitter:image" content="https://iili.io/fuZmZP9.gif">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flare",
+    "alternateName": ["Flare Discord Bot", "Neptune"],
+    "description": "Flare is a popular 24/7 utility and alert bot (rebrand of Neptune) created by Joachim Williams. Designed for Roblox games like Blox Fruits, real life shops, it tracks and notifies live in-game fruit stock updates every 4 hours, or real life shop alerts for cheap items and deals, provides trade values, calculators, win/loss checks, and manages servers, streaks, and communities quick alerts for items, popular games, and values.",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Websites, Discord",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Joachim Williams"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Joachim Williams"
+    },
+    "featureList": [
+      "Live Blox Fruits fruit stock tracking (every 4 hours)",
+      "Quick alerts for items and deals",
+      "Item values and trade analysis",
+      "Gacha calculators and win/loss checks",
+      "Private server link management",
+      "Community streaks and leaderboards",
+      "Deal discovery and promotions",
+      "Live shop tracking for things like amazon"
+    ],
+    "keywords": "Flare bot, Blox Fruits, Discord bot, fruit stock, item values, quick alerts, website alerts, amazon alerts, Joachim Williams"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -43,7 +97,6 @@
     button, a { -webkit-tap-highlight-color: transparent; }
     .container { width: min(1120px, 92%); margin-inline: auto; }
 
-    /* ── Top nav ── */
     .nav {
       position: sticky; top: 0; z-index: 50;
       backdrop-filter: blur(16px);
@@ -102,7 +155,6 @@
     }
     .btn-dashboard.show { display: inline-flex; }
 
-    /* ── Auth modals ── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 2000; display: none;
       align-items: center; justify-content: center;
@@ -147,7 +199,6 @@
     .modal .switch a { color: var(--accent); cursor: pointer; font-weight: 600; }
     #verifyCodeInput { letter-spacing: 8px; text-align: center; font-weight: 700; }
 
-    /* ── Rest of landing styles (unchanged) ── */
     .hero { position: relative; padding: 100px 0 80px; overflow: hidden; }
     .hero::before {
       content: ""; position: absolute; inset: -20% -10% auto; height: 75%;
@@ -440,7 +491,6 @@
   </div>
 </header>
 
-<!-- Auth modals -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <h2>Welcome back</h2>
@@ -528,7 +578,6 @@
   </div>
 </div>
 
-<!-- Hero + rest of landing (same content as before) -->
 <section class="hero">
   <div class="container hero-grid">
     <div>
