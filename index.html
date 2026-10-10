@@ -315,41 +315,93 @@
     .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
     .stat strong { display: block; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
     .stat span { font-size: 0.82rem; color: var(--text-muted); }
-    .dashboard {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 18px; box-shadow: var(--shadow); position: relative;
+    .terminal-wrap { position: relative; }
+    .terminal {
+      background: rgba(18, 21, 28, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 0;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
-    .dashboard::after {
-      content: ""; position: absolute; inset: -1px; border-radius: 21px;
-      background: linear-gradient(135deg, rgba(255,138,0,0.35), transparent 40%, rgba(167,139,250,0.2));
-      z-index: -1; opacity: 0.6;
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
     }
-    .dashboard-top {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 4px 4px 16px; border-bottom: 1px solid var(--border);
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
     }
-    .dashboard-title { font-weight: 700; font-size: 0.95rem; }
-    .dashboard-status { color: var(--success); font-size: 0.75rem; font-weight: 700; }
-    .dashboard-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; padding-top: 14px; }
-    .dashboard-card {
-      background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 12px; padding: 14px;
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .terminal-title {
+      margin-left: 10px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      letter-spacing: 0.02em;
     }
-    .dashboard-card-icon { width: 20px; height: 20px; margin-bottom: 8px; }
-    .dashboard-card-icon img { width: 20px; height: 20px; object-fit: contain; display: block; }
-    .dashboard-card-title { font-size: 0.82rem; color: var(--text-muted); }
-    .dashboard-card-value { font-size: 1.05rem; font-weight: 800; margin-top: 2px; }
-    .dashboard-alert {
-      margin-top: 10px; padding: 13px; border-radius: 12px;
-      background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2);
+    .terminal-body {
+      padding: 16px 18px 20px;
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      line-height: 1.7;
+      min-height: 220px;
     }
-    .dashboard-alert-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-    .dashboard-alert strong { font-size: 0.86rem; }
-    .live-tag {
-      font-size: 0.62rem; font-weight: 800; color: var(--success);
-      background: rgba(61,214,140,0.12); padding: 3px 6px; border-radius: 5px;
+    .term-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 6px;
+      color: #d4d4d8;
     }
-    .dashboard-alert p { color: var(--text-muted); font-size: 0.76rem; }
+    .term-prompt {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .term-cmd { color: #e4e4e7; }
+    .term-out {
+      color: #a1a1aa;
+      padding-left: 4px;
+    }
+    .term-out .term-emoji { margin-right: 6px; }
+    .term-out.muted {
+      color: #71717a;
+      font-size: 0.8rem;
+      padding-left: 18px;
+    }
+    .cursor {
+      display: inline-block;
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+      margin-left: 1px;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .terminal-glow {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(255,138,0,0.35), rgba(167,139,250,0.25));
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
     .trust { padding: 28px 0 56px; border-bottom: 1px solid var(--border); }
     .trust p {
       text-align: center; color: var(--text-muted); font-size: 0.82rem;
@@ -640,7 +692,7 @@
       </div>
       <h1>Track. <span>Trade.</span> Discover.</h1>
       <p class="hero-lead">
-        Flare Bot is the free Discord bot for live stock tracking, accurate values, trade tools, private servers, streaks and instant alerts — all in one place.
+        Flare Bot is the free bot with 3.8 million users, for live stock tracking, accurate values, trade tools, private servers, streaks and instant alerts all in one place.
       </p>
       <div class="hero-actions">
         <button class="btn-primary" id="heroSignup" type="button">Create your account →</button>
@@ -652,30 +704,25 @@
         <div class="stat"><strong>Free</strong><span>Core features forever</span></div>
       </div>
     </div>
-    <div class="dashboard" aria-label="Flare live overview">
-      <div class="dashboard-top">
-        <span class="dashboard-title">Flare Overview</span>
-        <span class="dashboard-status">● LIVE</span>
-      </div>
-      <div class="dashboard-grid">
-        <div class="dashboard-card">
-          <div class="dashboard-card-icon"><img src="https://iili.io/nFOd8ba.md.png" width="20" height="20" alt=""></div>
-          <div class="dashboard-card-title">Online</div>
-          <div class="dashboard-card-value">24/7</div>
+    <div class="terminal-wrap">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">flare — live</span>
         </div>
-        <div class="dashboard-card">
-          <div class="dashboard-card-icon"><img src="https://iili.io/nFOJ5a1.png" width="20" height="20" alt=""></div>
-          <div class="dashboard-card-title">New Deals Await</div>
-          <div class="dashboard-card-value">Now</div>
+        <div class="terminal-body">
+          <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">flare status</span></div>
+          <div class="term-line term-out"><span class="term-emoji">🟢</span> Online · 24/7</div>
+          <div class="term-line term-out"><span class="term-emoji">🔥</span> New Deals Await · Now</div>
+          <div class="term-line term-out"><span class="term-emoji">⚡</span> New Deals Detected · NOW</div>
+          <div class="term-line term-out muted">A tracked item has appeared in rotation.</div>
+          <div class="term-line term-out muted">Sign up now to view these deals.</div>
+          <div class="term-line"><span class="term-prompt">$</span> <span id="typingText"></span><span class="cursor">█</span></div>
         </div>
       </div>
-      <div class="dashboard-alert">
-        <div class="dashboard-alert-top">
-          <strong>New Deals Detected</strong>
-          <span class="live-tag">NOW</span>
-        </div>
-        <p>A tracked item has appeared in rotation. Sign up now to view these deals.</p>
-      </div>
+      <div class="terminal-glow"></div>
     </div>
   </div>
 </section>
@@ -1165,6 +1212,20 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   }
   clearAuth();
 });
+(function() {
+  const el = document.getElementById("typingText");
+  if (!el) return;
+  const text = "Start using flare...";
+  let i = 0;
+  function type() {
+    if (i <= text.length) {
+      el.textContent = text.slice(0, i);
+      i++;
+      setTimeout(type, 55 + Math.random() * 40);
+    }
+  }
+  setTimeout(type, 800);
+})();
 checkSession();
 </script>
 </body>
